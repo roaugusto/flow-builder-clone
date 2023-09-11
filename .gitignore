@@ -7,7 +7,7 @@
 *.zip
 
 # production
-/dist
+# /dist
 /docs-dist
 
 # misc

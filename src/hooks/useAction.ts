@@ -54,6 +54,7 @@ const useAction = () => {
     // one param: new type
     // two params: node, new type
     const node = (!!_newNodeType ? _node : currentNode) as INode;
+
     const newNodeType = (!!_newNodeType ? _newNodeType : _node) as string;
 
     const registerNode = getRegisterNode(registerNodes, newNodeType);
@@ -62,18 +63,6 @@ const useAction = () => {
     if (!newNode) {
       return;
     }
-
-    function ensureNodeChildrenHaveIds(children: any) {
-      children.forEach((child: any) => {
-        if (!child.hasOwnProperty('id')) {
-          child.id = `${_newNodeType || 'node'}-${uuid()}`;
-        }
-      });
-    }
-    
-    if (node.children) {
-      ensureNodeChildrenHaveIds(node.children);
-    }    
 
     if (getIsConditionNode(registerNodes, newNodeType)) {
       node.children = node.children || [];

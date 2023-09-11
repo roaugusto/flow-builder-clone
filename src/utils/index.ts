@@ -265,9 +265,19 @@ export const buildTreeNodes = (params: { nodes: INode[] }) => {
   return treeNodes;
 };
 
+function ensureNodeChildrenHaveIds(node: any) {
+  if (!node.hasOwnProperty('id')) {
+      node.id = `node-${uuid()}`;
+  };
+}
+
 const computeChildrenPath = (children: INode[], parentPath: string[]) => {
   for (let index = 0; index < children.length; index++) {
     const node = children[index];
+
+    if (node) {
+      ensureNodeChildrenHaveIds(node);
+    }    
 
     node.path = [...parentPath, 'children', String(index)];
 
